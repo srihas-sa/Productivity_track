@@ -1,0 +1,35 @@
+.OuterMostMindCont {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+.highlights12 {
+  font-weight:bold;
+  color:chocolate;
+  background-color: rgb(250, 160, 128);
+  padding: 10px;
+  width:50%;
+  border:solid 1px;
+  border-radius:10px;
+}
+
+@media screen and (min-width: 768px) {
+  .MindOuter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+
+
+@media (min-width: 756px) and (max-width: 900px) {
+  .mediaQuery {
+    display: flex;
+    flex-direction:column
+  }
+}

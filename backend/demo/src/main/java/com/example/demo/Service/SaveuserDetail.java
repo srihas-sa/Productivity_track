@@ -1,0 +1,29 @@
+package com.example.demo.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Controller.UserEntity;
+import com.example.demo.Repository.UserRepository;
+
+import jakarta.transaction.Transactional;
+
+@Service
+public class SaveuserDetail {
+  @Autowired
+  public UserRepository repository1;
+
+  @Transactional
+  public String saveUser(UserEntity entity) {
+    if (repository1.save(entity) != null) {
+      return "User added successfully";
+    } else {
+      return "Error in adding user";
+    }
+  }
+
+  public UserEntity findbyemial(String email) {
+    return repository1.findByEmail(email);
+  }
+
+}
