@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,12 @@ public class SaveuserDetail {
 
   public UserEntity findbyemial(String email) {
     return repository1.findByEmail(email);
+  }
+
+  public List<UserEntity> findbyname(String name) {
+    System.out.println("In service " + name);
+    System.out.println("In service 2" + repository1.findmyname(name));
+    return repository1.findmyname(name);
   }
 
 }
