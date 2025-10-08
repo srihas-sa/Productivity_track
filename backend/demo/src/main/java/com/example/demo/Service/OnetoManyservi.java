@@ -13,12 +13,17 @@ import com.example.demo.Controller.UserEntity;
 import com.example.demo.Repository.OneToManyRepo;
 import com.example.demo.Repository.UserRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.transaction.Transactional;
 
 @Service
 public class OnetoManyservi {
   @Autowired
   public OneToManyRepo repository1;
+  @PersistenceContext
+  private EntityManager entityManager;
 
   @Transactional
   public String saveUser(OneToManyPare entity) {
@@ -35,4 +40,15 @@ public class OnetoManyservi {
     return res.getContent().get(0);
   }
 
+  public void findbyblogCriteriaApi(String blog) {
+
+    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+    var cq = cb.createQuery(OneToManyPare.class);
+    var root = cq.from(OneToManyPare.class);
+    var details = root.join("userDetails");
+    cq.select(root).where(cb.like(details.get("BlogDet"), "%" + "This is my first blog" + "%"));
+    var query = entityManager.createQuery(cq);
+    var result = query.getResultList();
+    System.out.println("Criteria API result: " + result);
+  }
 }

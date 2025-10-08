@@ -12,6 +12,7 @@ const navigation = [
   { name: 'Phyical', href: '#Phyical', current: false },
   { name: 'Blog/Idea', href: '#Idea', current: false },
   { name: 'Tracker', href: '#Tracker', current: false },
+  { name: 'Routine', href: '#Routine', current: false },
 ]
 
 // let quicktour = {

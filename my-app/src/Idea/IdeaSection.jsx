@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
+import axios from "axios";
 
 export default function IdeasAndBlog() {
   const [ideas, setIdeas] = useState([]);
@@ -10,6 +11,30 @@ export default function IdeasAndBlog() {
       setIdeas([...ideas, input]);
       setInput("");
     }
+  };
+
+  const SaveIdeas = async () => {
+    // Save ideas to local storage
+    localStorage.setItem("ideas", JSON.stringify(ideas));
+    alert("Ideas saved!");
+    const userid=localStorage.getItem("email");
+    console.log(userid);
+    try{
+      const res=await axios.post("http://localhost:8000/ideas/save", 
+        {ideas,userid}
+      );    
+      console.log(res);
+      if(res.data.success){
+        alert("Ideas saved to server!");    
+      }
+      else{
+        alert("Error saving ideas to server!");
+      }
+
+  }
+  catch(err){
+    alert("Server error. Please try later.");
+  }
   };
 
   const deleteIdea = (index) => {
@@ -39,6 +64,12 @@ export default function IdeasAndBlog() {
               className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg flex items-center gap-1"
             >
               <Plus size={18} /> Add
+            </button>
+            <button
+              onClick={SaveIdeas}
+              className="bg-green-600 hover:bg-blue-700 px-3 py-2 rounded-lg flex items-center gap-1"
+            >
+               Save
             </button>
           </div>
 

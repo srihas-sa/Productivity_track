@@ -24,16 +24,16 @@ class loginrequest {
 
 @RestController
 // @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api")
-public class SignUp {
+@RequestMapping("/idea")
+public class IdeaController {
   @Autowired
   public SaveuserDetail service1;
 
   @Autowired
   public OnetoManyservi service2;
 
-  @PostMapping("/signup")
-  public String saveUser(@RequestBody UserEntity entity) {
+  @PostMapping("/save")
+  public String saveidea(@RequestBody UserEntity entity) {
     UserEntity user = new UserEntity();
     user.setName(entity.getName());
     user.setPassword(entity.getPassword());
@@ -55,7 +55,6 @@ public class SignUp {
     System.out.println("List size " + ll.size());
     System.out.println("List data " + ll);
     service2.findbyemial(user1.getEmail());
-    service2.findbyblogCriteriaApi("first");
     /* Practice code end */
 
     user.setUserDetails(details);
@@ -69,7 +68,7 @@ public class SignUp {
     }
   }
 
-  @PostMapping("/login")
+  @PostMapping("/ln")
   public UserEntity getUser(@RequestBody loginrequest request) {
     System.out.println(request.email);
     System.out.println(request.password);

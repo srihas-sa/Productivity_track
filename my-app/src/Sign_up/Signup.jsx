@@ -31,7 +31,7 @@ export default function SignUp() {
       console.log(response.data.data);
       if (response.data === "User added successfully") {
         alert("Account created successfully!");
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("email",email);
         //setLoggedIn(true);  
         navigate("/");
       } else {
