@@ -1,6 +1,10 @@
 package com.example.demo.Controller;
 
+import java.util.Collection;
+
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -11,8 +15,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
-@Table(name = "User_login")
-public class UserEntity {
+@Table(name = "UserEntity")
+public class UserEntity implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long Id;
@@ -65,6 +69,44 @@ public class UserEntity {
 
   public void setUserDetails(UserDetailsEntity userDetails) {
     this.userDetails = userDetails;
+  }
+
+  @Override
+  public String toString() {
+    return "UserEntity [Id=" + Id + ", name=" + name + ", email=" + email + ", password=" + password + ", userDetails="
+        + userDetails + "]";
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+  }
+
+  @Override
+  public String getUsername() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
   }
 
 }

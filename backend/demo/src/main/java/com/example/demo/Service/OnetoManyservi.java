@@ -1,15 +1,19 @@
 package com.example.demo.Service;
 
+import java.util.List;
+
 import org.hibernate.mapping.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Controller.OneToManyPare;
 import com.example.demo.Controller.UserEntity;
+import com.example.demo.Controller.UserSpecification;
 import com.example.demo.Repository.OneToManyRepo;
 import com.example.demo.Repository.UserRepository;
 
@@ -51,4 +55,21 @@ public class OnetoManyservi {
     var result = query.getResultList();
     System.out.println("Criteria API result: " + result);
   }
+
+  public void findbyblogSpecification(String blog) {
+    /*
+     * Specification<OneToManyPare> spec = (root, query, cb) -> {
+     * var details = root.join("userDetails");
+     * return cb.like(details.get("BlogDet"), "%" + blog + "%");
+     * };
+     * List<OneToManyPare> results = repository1.findAll(spec);
+     * System.out.println("Specification result: " + results);
+     */
+    Specification<UserEntity> spec = Specification
+        .where(UserSpecification.hasName("srihas"))
+        .and(UserSpecification.emailContains("sri"));
+    List<UserEntity> results = repository1.findAll(spec);
+    System.out.println("Specification result: " + results);
+  };
+
 }

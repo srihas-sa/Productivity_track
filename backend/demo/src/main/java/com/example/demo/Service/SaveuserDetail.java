@@ -3,6 +3,9 @@ package com.example.demo.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Controller.UserEntity;
@@ -11,7 +14,7 @@ import com.example.demo.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class SaveuserDetail {
+public class SaveuserDetail implements UserDetailsService {
   @Autowired
   public UserRepository repository1;
 
@@ -32,6 +35,12 @@ public class SaveuserDetail {
     System.out.println("In service " + name);
     System.out.println("In service 2" + repository1.findmyname(name));
     return repository1.findmyname(name);
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
   }
 
 }

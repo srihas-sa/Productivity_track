@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,11 +33,14 @@ public class SignUp {
   @Autowired
   public OnetoManyservi service2;
 
+  @Autowired
+  private PasswordEncoder PasswordEncoder;
+
   @PostMapping("/signup")
   public String saveUser(@RequestBody UserEntity entity) {
     UserEntity user = new UserEntity();
     user.setName(entity.getName());
-    user.setPassword(entity.getPassword());
+    user.setPassword(PasswordEncoder.encode(entity.getPassword()));
     user.setEmail(entity.getEmail());
     UserDetailsEntity details = new UserDetailsEntity();
 
@@ -55,7 +59,9 @@ public class SignUp {
     System.out.println("List size " + ll.size());
     System.out.println("List data " + ll);
     service2.findbyemial(user1.getEmail());
+
     service2.findbyblogCriteriaApi("first");
+    service2.findbyblogSpecification("srihas");
     /* Practice code end */
 
     user.setUserDetails(details);
