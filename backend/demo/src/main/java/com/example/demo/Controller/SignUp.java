@@ -90,6 +90,7 @@ public class SignUp {
     }
 
     if (user.getPassword().equals(request.password)) {
+      System.out.println("Password matched");
       return user;
     } else {
       return user;

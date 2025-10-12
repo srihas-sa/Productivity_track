@@ -1,4 +1,17 @@
 import React, { useState } from "react";
+import Paneer from '../Images/Paneer.png';
+import Eggs from '../Images/Eggs.png';
+import Soyabean from '../Images/Soyabean.png';
+import ChickenBreast from '../Images/ChickenBreast.png';
+import GreekYogurt from '../Images/GreekYogurt.png';
+import Rice from '../Images/Rice.png';
+import Nuts from '../Images/Nuts.png';
+import Banana from '../Images/Banana.png';
+import Oats from '../Images/Oats.png';
+import Pomogranate from '../Images/Pomogranate.png';
+import OliveOil from '../Images/OliveOil.png';
+import Lenttis from '../Images/Lenttis.png';
+import DarkChocolate from '../Images/DarkChocolate.png';
 import "./Nutrition.css";
 
 /**
@@ -18,23 +31,25 @@ import "./Nutrition.css";
 
 const FOOD_EXAMPLES = {
   protein: [
-    { name: "Chicken breast (100 g)", protein_g: 31, kcal: 165, img: "https://images.unsplash.com/photo-1604909053287-6f80d3b6f1f1?auto=format&fit=crop&w=800&q=60" },
-    { name: "Canned tuna (100 g)", protein_g: 29, kcal: 132, img: "https://images.unsplash.com/photo-1603052875904-9f7b2cd35d56?auto=format&fit=crop&w=800&q=60" },
-    { name: "Greek yogurt (200 g)", protein_g: 20, kcal: 146, img: "https://images.unsplash.com/photo-1592928305593-8e3b3b3278fc?auto=format&fit=crop&w=800&q=60" },
+    { name: "Chicken breast (100 g)", protein_g: 31, kcal: 165, img: ChickenBreast },
+    { name: "Paneer (100 g)", protein_g: 20, kcal: 132, img: Paneer },
+    { name: "Greek yogurt (200 g)", protein_g: 20, kcal: 146, img: GreekYogurt },
+    { name: "Eggs (3)", protein_g: 18, kcal: 240, img:Eggs },
+    { name:"Soybeans (100 g)", protein_g: 36, kcal: 173, img: Soyabean },
   ],
   carbs: [
-    { name: "Cooked rice (150 g)", carbs_g: 45, kcal: 205, img: "https://images.unsplash.com/photo-1604908177224-98b2a1d96a2f?auto=format&fit=crop&w=800&q=60" },
-    { name: "Oats (50 g)", carbs_g: 33, kcal: 188, img: "https://images.unsplash.com/photo-1600690131477-8b3d8b6a2f6d?auto=format&fit=crop&w=800&q=60" },
-    { name: "Banana (1 medium)", carbs_g: 27, kcal: 105, img: "https://images.unsplash.com/photo-1574226516831-e1dff420e37d?auto=format&fit=crop&w=800&q=60" },
+    { name: "Cooked rice (150 g)", carbs_g: 45, kcal: 205, img: Rice },
+    { name: "Oats (50 g)", carbs_g: 33, kcal: 188, img: Oats },
+    { name: "Banana (1 medium)", carbs_g: 27, kcal: 105, img: Banana },
   ],
   fats: [
-    { name: "Olive oil (1 tbsp)", fats_g: 14, kcal: 119, img: "https://images.unsplash.com/photo-1542345812-d98b5cd6cf98?auto=format&fit=crop&w=800&q=60" },
-    { name: "Almonds (30 g)", fats_g: 15, kcal: 173, img: "https://images.unsplash.com/photo-1574226516831-e1dff420e37d?auto=format&fit=crop&w=800&q=60" },
-    { name: "Avocado (1/2 medium)", fats_g: 15, kcal: 160, img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=60" },
+    { name: "Olive oil (1 tbsp)", fats_g: 14, kcal: 119, img: OliveOil },
+    { name: "Nuts (30 g)", fats_g: 15, kcal: 173, img: Nuts },
+    { name: "Dark Chocolate (100gm )", fats_g: 32, kcal: 533, img: DarkChocolate },
   ],
   fiber: [
-    { name: "Broccoli (100 g)", fiber_g: 2.6, img: "https://images.unsplash.com/photo-1604908177087-1d19b3a6be8b?auto=format&fit=crop&w=800&q=60" },
-    { name: "Lentils (100 g cooked)", fiber_g: 7.9, img: "https://images.unsplash.com/photo-1604908177317-7f4c6d8e6f8d?auto=format&fit=crop&w=800&q=60" },
+    { name: "Pomogranate (100 g)", fiber_g: 4, img: Pomogranate },
+    { name: "Lentils (100 g cooked)", fiber_g: 7.9, img: Lenttis },
     { name: "Apple (1 medium)", fiber_g: 4.4, img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=60" },
   ],
 };

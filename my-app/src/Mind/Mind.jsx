@@ -5,7 +5,7 @@ import SocialMediaImage from '../Images/SocialMediaImage.png';
 import Technologmage from '../Images/Technologmage.png';
 import MindfullnessCover1 from '../Images/MindfullnessCover1.png';
 import MindfullnessCover2 from '../Images/MindfullnessCover2.png';
-
+import BrainImage from '../Images/BrainImage.png';
 
 export default function Mind() {
   const navigate = useNavigate();
@@ -15,6 +15,10 @@ export default function Mind() {
 
   const handleClick2 = () => {
     navigate('/mindfullness');
+  };
+
+  const handleClick3 = () => {
+    navigate('/BrainTeasers');
   };
 
   const mindTopics = [
@@ -32,9 +36,10 @@ And in every story, he finds a new piece of himself he never knew was missing."`
       buttonAction: handleClick2,
     },
     {
-      title: 'Family and People',
-      desc: `"Everyone you meet knows something you don’t — stay curious, stay humble. You don’t need the perfect moment; start with what you have, where you are, and keep showing up."`,
-      img: PeopleImage,
+      title: 'Put your mind to work.',
+      desc: `"If you were boed and want to solve and train your brain click on learn more based on the level it will ask you question and try solving the question give 100per focus and get better every day."`,
+      img: BrainImage,
+      buttonAction: handleClick3,
     },
     {
       title: 'Goals',

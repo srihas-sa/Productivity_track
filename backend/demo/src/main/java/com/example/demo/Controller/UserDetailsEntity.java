@@ -2,6 +2,9 @@ package com.example.demo.Controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
@@ -13,6 +16,8 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "UserDetailsEntity")
+@JsonIdentityInfo(generator = com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class UserDetailsEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

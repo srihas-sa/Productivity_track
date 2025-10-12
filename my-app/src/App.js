@@ -10,6 +10,7 @@ import Grooming from './Grooming/Grooming.jsx';
 import Signup from './Sign_up/Signup.jsx';
 import Nutrition from './Nutrition/Nutrition.jsx';
 import Mindfulness from './Mindfullness/Mindfullness.jsx';
+import BrainActivity from './BrainActivity/BrainActivity.jsx';
 //import Home from './pages/Home';
 //import About from './pages/About';
 //import Contact from './pages/Contact';
@@ -30,6 +31,7 @@ function App() {
         <Route path="/grooming" element={<Grooming></Grooming>} />
         <Route path="/nutrition" element={<Nutrition></Nutrition>}/>
         <Route path="/mindfullness" element={<Mindfulness></Mindfulness>}></Route>
+        <Route path="/BrainTeasers" element={<BrainActivity></BrainActivity>}></Route>
       </Routes>
     </Router>
     
