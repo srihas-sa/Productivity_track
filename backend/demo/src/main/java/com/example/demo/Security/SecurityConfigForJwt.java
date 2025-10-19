@@ -6,6 +6,7 @@ import com.example.demo.AuthFilter.JWTAuthenticationProvider;
 //import com.conceptandcoding.learningspringboot.JWT.filters.JWTRefreshFilter;
 //import com.conceptandcoding.learningspringboot.JWT.filters.JwtValidationFilter;
 import com.example.demo.AuthFilter.JWTUtil;
+import com.example.demo.AuthFilter.JWTValidationFilter;
 import com.example.demo.Controller.UserEntity;
 import com.example.demo.Service.SaveuserDetail;
 
@@ -70,7 +71,7 @@ public class SecurityConfigForJwt {
 
     // Authentication filter responsible for login
     JWTAuntheticationFIlter jwtAuthFilter = new JWTAuntheticationFIlter(authenticationManager, jwtUtil);
-    JWTAuthenticationProvider jwtValidationFilter = new JWTAuthenticationProvider(jwtUtil, userDetailsService);
+    JWTValidationFilter jwtValidationFilter = new JWTValidationFilter(authenticationManager);
     // Validation filter for checking JWT in every request
     // JaasApiIntegrationFilter jwtValidationFilter = new
     // JWTAuntheticationFIlter(authenticationManager);
@@ -80,7 +81,7 @@ public class SecurityConfigForJwt {
     // authenticationManager);
 
     http.authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/signup", "/api/login", "http://localhost:3000").permitAll()
+        .requestMatchers("/api/signup", "/api/login", "/api/hello", "http://localhost:3000").permitAll()
         // .requestMatchers("/api/login")
         .anyRequest().authenticated())
         .sessionManagement(session -> session
@@ -89,7 +90,7 @@ public class SecurityConfigForJwt {
         .cors(cors -> {
         })
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // generate token filter
-        .addFilterAfter((Filter) jwtValidationFilter, JWTAuntheticationFIlter.class); //
+        .addFilterAfter(jwtValidationFilter, JWTAuntheticationFIlter.class); //
     // validate token filter
     // .addFilterAfter(jwtRefreshFilter, JwtValidationFilter.class); // refresh
     // token filter
@@ -99,7 +100,8 @@ public class SecurityConfigForJwt {
   @Bean
   public AuthenticationManager authenticationManager() {
     return new ProviderManager(Arrays.asList(
-        daoAuthenticationProvider()));
+        daoAuthenticationProvider(),
+        jwtAuthenticationProvider()));
   }
 
 }

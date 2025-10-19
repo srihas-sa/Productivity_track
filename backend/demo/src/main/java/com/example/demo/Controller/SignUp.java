@@ -97,4 +97,28 @@ public class SignUp {
     }
 
   }
+
+  /* Dummy code below */
+  @GetMapping("/hello")
+  public UserEntity getUser12(@RequestBody loginrequest request) {
+    System.out.println(request.email);
+    System.out.println(request.password);
+    UserEntity user = new UserEntity();
+    user = service1.findbyemial(request.email);
+
+    System.out.println(user.getPassword());
+    System.out.println(request.password);
+    System.out.println(user.getUserDetails().getBlogDet());
+    if (user == null) {
+      return user;
+    }
+
+    if (user.getPassword().equals(request.password)) {
+      System.out.println("Password matched");
+      return user;
+    } else {
+      return user;
+    }
+
+  }
 }

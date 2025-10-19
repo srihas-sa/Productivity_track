@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import {reducer} from '../Features/practice';
 import axios from "axios";
 
 export default function IdeasAndBlog() {
+
+  
+  const stateToken=useSelector((state)=>state.token);
+  console.log("Token in IdeaSection:",stateToken);
   const [ideas, setIdeas] = useState([]);
   const [input, setInput] = useState("");
 
@@ -40,6 +46,10 @@ export default function IdeasAndBlog() {
   const deleteIdea = (index) => {
     setIdeas(ideas.filter((_, i) => i !== index));
   };
+
+  const clicktotoken=()=>{
+    console.log("Token from Redux Store:",stateToken);
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
@@ -110,7 +120,7 @@ export default function IdeasAndBlog() {
         </div>
       </div>
 
-      
+      <button onClick={clicktotoken}> Click to check token</button>
     </div>
   );
 }

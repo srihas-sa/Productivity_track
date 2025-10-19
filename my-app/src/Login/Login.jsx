@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import {setCredentials,logOut} from '../Features/practice';
 import axios from "axios";
 
 export default function Login() {
@@ -9,7 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const dispatch=useDispatch();
   const handleLogin = async () => {
     // email.trim();
     //password.trim();
@@ -18,12 +19,13 @@ export default function Login() {
         email,
         password,
       });
-      console.log(res);
+      console.log(res.status);
+      const data= res.data;
       if (res.status===200) {
-      const data = res.data;
+      //const data = res.data;
       console.log("Access Token:", data.accessToken);
+      dispatch(setCredentials({token:data.accessToken}));
       // Store access token in memory or state
-      localStorage.setItem("token", data.accessToken);
       setLoggedIn(true);
       navigate("/");
     } else {
@@ -31,6 +33,7 @@ export default function Login() {
       console.log("Login failed");
     }
     } catch (err) {
+      console.error("Error during login:", err);
       alert("Invalid credentials");
     }
   };
