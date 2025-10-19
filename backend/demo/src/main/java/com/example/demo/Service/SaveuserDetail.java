@@ -40,7 +40,10 @@ public class SaveuserDetail implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
+    System.out.println("In loadUserByUsername: " + username);
+    return repository1.findByEmail(username);
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'loadUserByUsername'");
   }
 
 }

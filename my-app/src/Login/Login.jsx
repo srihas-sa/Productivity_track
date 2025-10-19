@@ -18,16 +18,18 @@ export default function Login() {
         email,
         password,
       });
-      console.log(res.data);
-      const User_detals=res.data;
-
-      if(res.data.email===email){
-        localStorage.setItem("token", res.data.token);
-        setLoggedIn(true);
-        navigate("/");
-      } else {
-        alert("Invalid credentials");
-      }
+      console.log(res);
+      if (res.status===200) {
+      const data = res.data;
+      console.log("Access Token:", data.accessToken);
+      // Store access token in memory or state
+      localStorage.setItem("token", data.accessToken);
+      setLoggedIn(true);
+      navigate("/");
+    } else {
+      console.log(res.status);
+      console.log("Login failed");
+    }
     } catch (err) {
       alert("Invalid credentials");
     }

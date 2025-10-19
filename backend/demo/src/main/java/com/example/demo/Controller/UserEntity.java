@@ -1,14 +1,17 @@
 package com.example.demo.Controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
+import io.jsonwebtoken.lang.Collections;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -104,13 +107,14 @@ public class UserEntity implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    // return List.of(new SimpleGrantedAuthority(role));
+    return Collections.emptyList();
   }
 
   @Override
   public String getUsername() {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    return this.email;
   }
 
 }
