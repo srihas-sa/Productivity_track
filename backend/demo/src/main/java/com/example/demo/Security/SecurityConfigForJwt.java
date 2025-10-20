@@ -81,7 +81,7 @@ public class SecurityConfigForJwt {
     // authenticationManager);
 
     http.authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/signup", "/api/login", "/api/hello", "http://localhost:3000").permitAll()
+        .requestMatchers("/api/signup", "/api/login", "http://localhost:3000").permitAll()
         // .requestMatchers("/api/login")
         .anyRequest().authenticated())
         .sessionManagement(session -> session

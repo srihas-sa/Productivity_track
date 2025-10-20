@@ -41,6 +41,7 @@ public class JWTValidationFilter extends OncePerRequestFilter {
   private String extractJwtFromRequest(HttpServletRequest request) {
     String bearerToken = request.getHeader("Authorization");
     if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+      System.out.println("Bearer token found: " + bearerToken);
       return bearerToken.substring(7);
     }
     return null;

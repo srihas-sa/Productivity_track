@@ -21,13 +21,19 @@ export default function IdeasAndBlog() {
 
   const SaveIdeas = async () => {
     // Save ideas to local storage
-    localStorage.setItem("ideas", JSON.stringify(ideas));
-    alert("Ideas saved!");
-    const userid=localStorage.getItem("email");
-    console.log(userid);
+    //localStorage.setItem("ideas", JSON.stringify(ideas));
+    //alert("Ideas saved!");
+   // const userid=localStorage.getItem("email");
+   console.log(stateToken+"1212");
+    //console.log(userid);
+    const ideaData = ideas.join("\n");
+  console.log(ideaData);
+
     try{
-      const res=await axios.post("http://localhost:8000/ideas/save", 
-        {ideas,userid}
+      const res=await axios.get("http://localhost:8000/api/ideas", { 
+         headers: { Authorization: `Bearer ${stateToken}` },
+          params: { ideas: ideaData }
+      }
       );    
       console.log(res);
       if(res.data.success){
