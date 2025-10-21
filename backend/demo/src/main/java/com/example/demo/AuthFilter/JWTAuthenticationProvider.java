@@ -33,7 +33,8 @@ public class JWTAuthenticationProvider implements AuthenticationProvider {
     }
 
     UserEntity userDetails = (UserEntity) userDetailsService.loadUserByUsername(username);
-    return new UsernamePasswordAuthenticationToken(userDetails, null);
+    System.out.println("JWTAuthenticationProvider - User details loaded for: " + username);
+    return new UsernamePasswordAuthenticationToken(userDetails, token, userDetails.getAuthorities());
   }
 
   @Override

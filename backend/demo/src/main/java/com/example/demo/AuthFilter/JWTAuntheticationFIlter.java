@@ -66,7 +66,7 @@ public class JWTAuntheticationFIlter extends OncePerRequestFilter {
             // storage or in-memory
             Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
             refreshCookie.setHttpOnly(true); // prevent javascript from accessing it
-            refreshCookie.setSecure(true); // sent only over HTTPS
+            refreshCookie.setSecure(false); // sent only over HTTPS
             refreshCookie.setPath("/refresh-token"); // Cookie available only for refresh endpoint
             refreshCookie.setMaxAge(7 * 24 * 60 * 60); // 7 days expiry
             response.addCookie(refreshCookie);

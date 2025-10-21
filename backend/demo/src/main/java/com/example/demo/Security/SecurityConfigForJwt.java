@@ -2,6 +2,7 @@ package com.example.demo.Security;
 
 import com.example.demo.AuthFilter.JWTAuntheticationFIlter;
 import com.example.demo.AuthFilter.JWTAuthenticationProvider;
+import com.example.demo.AuthFilter.JWTRefreshFilter;
 //import com.conceptandcoding.learningspringboot.JWT.filters.JWTAuthenticationFilter;
 //import com.conceptandcoding.learningspringboot.JWT.filters.JWTRefreshFilter;
 //import com.conceptandcoding.learningspringboot.JWT.filters.JwtValidationFilter;
@@ -72,6 +73,7 @@ public class SecurityConfigForJwt {
     // Authentication filter responsible for login
     JWTAuntheticationFIlter jwtAuthFilter = new JWTAuntheticationFIlter(authenticationManager, jwtUtil);
     JWTValidationFilter jwtValidationFilter = new JWTValidationFilter(authenticationManager);
+    JWTRefreshFilter jwtRefreshFilter = new JWTRefreshFilter(jwtUtil, authenticationManager);
     // Validation filter for checking JWT in every request
     // JaasApiIntegrationFilter jwtValidationFilter = new
     // JWTAuntheticationFIlter(authenticationManager);
@@ -90,7 +92,9 @@ public class SecurityConfigForJwt {
         .cors(cors -> {
         })
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // generate token filter
-        .addFilterAfter(jwtValidationFilter, JWTAuntheticationFIlter.class); //
+        .addFilterAfter(jwtValidationFilter, JWTAuntheticationFIlter.class) // validate token filter
+        .addFilterAfter(jwtRefreshFilter, JWTValidationFilter.class);
+
     // validate token filter
     // .addFilterAfter(jwtRefreshFilter, JwtValidationFilter.class); // refresh
     // token filter

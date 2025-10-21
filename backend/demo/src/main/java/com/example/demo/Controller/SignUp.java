@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -99,17 +100,4 @@ public class SignUp {
 
   }
 
-  /* Dummy code below */
-  @GetMapping("/ideas/{idealist}")
-  public UserEntity getUser12(@RequestParam String ideas) {
-    System.out.println(ideas);
-    UserEntity user = new UserEntity();
-    // user = service1.findbyemial(request.email);
-
-    // System.out.println(user.getPassword());
-    // System.out.println(request.password);
-    // System.out.println(user.getUserDetails().getBlogDet());
-    return user;
-
-  }
 }

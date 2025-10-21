@@ -29,7 +29,9 @@ public class JWTValidationFilter extends OncePerRequestFilter {
     if (token != null) {
 
       JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(token);
+      System.out.println("JWT Validation Filter - Authenticating token: " + token);
       Authentication authResult = authenticationManager.authenticate(authenticationToken);
+      System.out.println("JWT Validation Filter - Authenticated: " + authResult.isAuthenticated());
       if (authResult.isAuthenticated()) {
         SecurityContextHolder.getContext().setAuthentication(authResult);
       }
@@ -41,7 +43,7 @@ public class JWTValidationFilter extends OncePerRequestFilter {
   private String extractJwtFromRequest(HttpServletRequest request) {
     String bearerToken = request.getHeader("Authorization");
     if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-      System.out.println("Bearer token found: " + bearerToken);
+      System.out.println("Bearer token found21: " + bearerToken);
       return bearerToken.substring(7);
     }
     return null;

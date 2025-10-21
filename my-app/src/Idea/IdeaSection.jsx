@@ -11,6 +11,7 @@ export default function IdeasAndBlog() {
   console.log("Token in IdeaSection:",stateToken);
   const [ideas, setIdeas] = useState([]);
   const [input, setInput] = useState("");
+  const [blogInput, setBlogInput] = useState("");
 
   const addIdea = () => {
     if (input.trim() !== "") {
@@ -18,6 +19,29 @@ export default function IdeasAndBlog() {
       setInput("");
     }
   };
+
+  const Blogpublish =  async ()=>{
+    const blogData = blogInput;
+    console.log(blogData);
+    try{
+      const res=await axios.post("http://localhost:8000/api/blog", { 
+         Blogs: blogData },
+        {  headers: { Authorization: `Bearer ${stateToken}` },
+      }
+      );    
+      console.log(res);
+      if(res.status===200){
+        alert("Blog saved to server!");    
+      }
+      else{
+        alert("Error saving ideas to server!");
+      }
+
+  }
+  catch(err){
+    alert("Server error. Please try later.");
+  }
+  }
 
   const SaveIdeas = async () => {
     // Save ideas to local storage
@@ -30,13 +54,13 @@ export default function IdeasAndBlog() {
   console.log(ideaData);
 
     try{
-      const res=await axios.get("http://localhost:8000/api/ideas", { 
-         headers: { Authorization: `Bearer ${stateToken}` },
-          params: { ideas: ideaData }
+      const res=await axios.post("http://localhost:8000/api/ideas", { 
+         ideas: ideaData },
+        {  headers: { Authorization: `Bearer ${stateToken}` },
       }
       );    
       console.log(res);
-      if(res.data.success){
+      if(res.status===200){
         alert("Ideas saved to server!");    
       }
       else{
@@ -118,9 +142,9 @@ export default function IdeasAndBlog() {
           </p>
           <textarea
             className="w-full h-40 p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Write your blog here..."
+            placeholder="Write your blog here..." onChange={(e)=>setBlogInput(e.target.value)}
           ></textarea>
-          <button className="mt-4 bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg shadow-md transition">
+          <button className="mt-4 bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg shadow-md transition" onClick={Blogpublish}>
             Publish to Medium
           </button>
         </div>

@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { Store } from './App/Store.js';
+import {Provider } from 'react-redux';
+import  Store  from './App/Store.js';
 import HomePage from './Homepage/HomePage';
 import Workout from './WorkOut/Workout.jsx';
 import Login from './Login/Login.jsx';
