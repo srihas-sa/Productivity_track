@@ -14,7 +14,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await api.post("/login", { email, password });
+      const res = await api.post("/login", { email, password,role:"user", permissions:["read"] });
 
       if (res.status === 200) {
         const { accessToken } = res.data;
@@ -66,6 +66,16 @@ export default function Login() {
         >
           Login
         </button>
+         {/* Sign Up Button */}
+        <p className="text-gray-400 text-center mt-6">
+          Don’t have an account?{" "}
+          <button
+            onClick={() => navigate("/signup")}
+            className="text-indigo-400 hover:text-indigo-300 font-semibold"
+          >
+            Sign Up
+          </button>
+        </p>
       </div>
     </div>
   );

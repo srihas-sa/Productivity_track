@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +24,7 @@ import reactor.core.publisher.Sinks.One;
 class loginrequest {
   public String email;
   public String password;
+  public String role;
 }
 
 @RestController
@@ -44,7 +46,12 @@ public class SignUp {
     user.setName(entity.getName());
     user.setPassword(PasswordEncoder.encode(entity.getPassword()));
     user.setEmail(entity.getEmail());
+    user.setRole(entity.getRole());
     UserDetailsEntity details = new UserDetailsEntity();
+    List<PermissionEntity> perm = entity.getPermissions();
+    System.out.println("Permissions size " + perm.size());
+    System.out.println("Permission name " + perm.get(0).getPermissionName());
+    // perm.setPermissionName(entity.);
 
     /* Practice code */
     OneToManyPare user1 = new OneToManyPare();
@@ -67,7 +74,7 @@ public class SignUp {
     /* Practice code end */
 
     user.setUserDetails(details);
-
+    user.setPermissions(perm);
     if (service1.saveUser(user) != "User added successfully") {
       return "Error in adding user";
     } else {
@@ -81,6 +88,7 @@ public class SignUp {
   public UserEntity getUser(@RequestBody loginrequest request) {
     System.out.println(request.email);
     System.out.println(request.password);
+    System.out.println(request.role);
     UserEntity user = new UserEntity();
     user = service1.findbyemial(request.email);
 

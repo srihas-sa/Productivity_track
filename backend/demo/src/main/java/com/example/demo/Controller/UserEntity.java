@@ -1,7 +1,11 @@
 package com.example.demo.Controller;
 
+//import java.security.Permission;
+import java.security.Permissions;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import io.jsonwebtoken.lang.Collections;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
@@ -31,8 +36,12 @@ public class UserEntity implements UserDetails {
   @Column(unique = true)
   private String email;
   private String password;
+  private String role;
   @OneToOne(cascade = { jakarta.persistence.CascadeType.ALL })
   private UserDetailsEntity userDetails;
+
+  @OneToMany(mappedBy = "user", cascade = { jakarta.persistence.CascadeType.ALL })
+  private List<PermissionEntity> permissions;
 
   public UserEntity() {
 
@@ -104,11 +113,33 @@ public class UserEntity implements UserDetails {
     return true;
   }
 
+  public void setRole(String role) {
+    this.role = role;
+  }
+
+  public String getRole() {
+    return role;
+  }
+
+  public List<PermissionEntity> getPermissions() {
+    return permissions;
+  }
+
+  public void setPermissions(List<PermissionEntity> permissions) {
+    this.permissions = permissions;
+  }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     // TODO Auto-generated method stub
-    // return List.of(new SimpleGrantedAuthority(role));
-    return Collections.emptyList();
+    Set<GrantedAuthority> authorities = new HashSet<>();
+    authorities.add(new SimpleGrantedAuthority(role));
+    permissions.forEach(permission -> {
+      authorities.add(new SimpleGrantedAuthority(permission.getPermissionName()));
+    });
+    return authorities;
+
+    // return Collections.emptyList();
   }
 
   @Override
