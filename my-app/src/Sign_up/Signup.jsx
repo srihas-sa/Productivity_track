@@ -27,13 +27,18 @@ export default function SignUp() {
         name,
         email,
         password,
+        role: "ROLE_USER",
+        permissions: [
+  { permissionName: "Read" }
+]
+
       });
       console.log(response.data.data);
       if (response.data === "User added successfully") {
         alert("Account created successfully!");
         localStorage.setItem("email",email);
         //setLoggedIn(true);  
-        navigate("/");
+        navigate("/login");
       } else {
         alert(`Try giving different email`);
       }

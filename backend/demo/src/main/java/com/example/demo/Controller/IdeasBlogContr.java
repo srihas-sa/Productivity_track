@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -69,6 +70,7 @@ public class IdeasBlogContr {
   private PasswordEncoder PasswordEncoder;
 
   @PostMapping("/blog")
+  @PreAuthorize("hasRole('USER')")
   public UserEntity getUser13(@AuthenticationPrincipal UserEntity user, @RequestBody Blog1 blogData) {
     System.out.println("blog called" + blogData.getBlogs());
     System.out.println("Authenticated user details: " + user.getUserDetails().getBlogDet());

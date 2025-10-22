@@ -36,8 +36,15 @@ public class PermissionEntity {
     return permissionName;
   }
 
-  public void setPermissionName(String permissionName) {
-    this.permissionName = permissionName;
+  public void setPermissionName(String permissionName2) {
+    this.permissionName = permissionName2;
   }
 
+  public UserEntity getUser() {
+    return user;
+  }
+
+  public void setUser(UserEntity user) {
+    this.user = user;
+  }
 }

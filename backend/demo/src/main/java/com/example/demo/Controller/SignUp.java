@@ -48,9 +48,20 @@ public class SignUp {
     user.setEmail(entity.getEmail());
     user.setRole(entity.getRole());
     UserDetailsEntity details = new UserDetailsEntity();
+    //System.out.println("Blog details: " + entity.getUserDetails().getBlogDet());
     List<PermissionEntity> perm = entity.getPermissions();
-    System.out.println("Permissions size " + perm.size());
-    System.out.println("Permission name " + perm.get(0).getPermissionName());
+    System.out.println(perm);
+    List<PermissionEntity> permissionEntities = entity.getPermissions().stream()
+        .map(permissionName -> {
+          PermissionEntity p = new PermissionEntity();
+          p.setPermissionName(permissionName.getPermissionName());
+        
+          p.setUser(user); // important for bidirectional link
+          return p;
+        })
+        .toList();
+
+    user.setPermissions(permissionEntities);
     // perm.setPermissionName(entity.);
 
     /* Practice code */
@@ -74,7 +85,7 @@ public class SignUp {
     /* Practice code end */
 
     user.setUserDetails(details);
-    user.setPermissions(perm);
+    //user.setPermissions(perm);
     if (service1.saveUser(user) != "User added successfully") {
       return "Error in adding user";
     } else {

@@ -14,8 +14,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await api.post("/login", { email, password,role:"user", permissions:["read"] });
-
+      const res = await api.post("/login", { email, password});
       if (res.status === 200) {
         const { accessToken } = res.data;
         dispatch(setCredentials({ token: accessToken }));
