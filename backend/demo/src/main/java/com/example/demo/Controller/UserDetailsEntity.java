@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
@@ -29,11 +31,22 @@ public class UserDetailsEntity {
   @Lob
   @Column(columnDefinition = "TEXT")
   private String Checklist;
+
+  private List<byte[]> GrommingImages;
   @OneToOne(mappedBy = "userDetails")
   private UserEntity user;
 
+
   public UserDetailsEntity() {
 
+  }
+
+  public void setGrommingImages(List<byte[]> GrommingImages) {
+    this.GrommingImages = GrommingImages;
+  }
+
+  public List<byte[]> getGrommingImages() {
+    return GrommingImages;
   }
 
   public long getId() {
