@@ -1,0 +1,29 @@
+/*
+.outermostContainer {
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url('../Images/BackgroundImageTry.png') center/cover no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+*/
+
+/* Additional styles can be added here as needed */
+
+.outermostContainer {
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url('../Images/BackgroundImageTry.png') center/cover no-repeat;
+  background-attachment: fixed;   /* Keeps the image fixed when scrolling */
+  background-size: cover;         /* Make it fill the entire area */
+  background-position: center;    /* Center the image */
+  background-repeat: no-repeat;   /* Prevent tiling */
+  min-height: 100vh;
+  width: 100vw;
+  color: #F5E8D8;
+  font-family: serif;
+}

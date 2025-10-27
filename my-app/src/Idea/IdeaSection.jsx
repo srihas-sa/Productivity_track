@@ -82,7 +82,7 @@ export default function IdeasAndBlog() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
+    <div className="min-h-screen  text-white p-6">
       <h1 className="text-3xl font-bold text-center mb-8">My Space</h1>
 
       {/* Grid Layout: 1 col on small, 2 cols on medium+ */}

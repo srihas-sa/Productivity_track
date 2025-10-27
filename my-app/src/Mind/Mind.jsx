@@ -49,7 +49,7 @@ And in every story, he finds a new piece of himself he never knew was missing."`
   ];
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-900 to-black bg-cover bg-fixed text-gray-100 p-6 space-y-12">
+    <div className="w-full min-h-screen bg-gradient-to-br   bg-fixed text-gray-100 p-6 space-y-12">
       <h1 className="text-4xl font-bold text-center text-yellow-400 mb-8">
         Mental Health
       </h1>

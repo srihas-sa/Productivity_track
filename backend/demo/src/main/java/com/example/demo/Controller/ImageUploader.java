@@ -4,33 +4,51 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.Repository.UserRepository;
 
 @RestController
 @RequestMapping("/api")
 
 class inputImageUploader {
-  public ArrayList<byte[]> imageData;
-
+  public ArrayList<byte[]> images;
+  inputImageUploader(){
+    this.images=images;
+  }
 }
 
 
 public class ImageUploader {
+
+  @Autowired
+  private UserEntity userEntity;
+  @Autowired
+  private UserRepository userRepository;
   
   @GetMapping("/uploadImage")
-  public String uploadImage(@RequestPart ImageUploader imageUploader) {
-    ArrayList<byte[]> images = new ArrayList<>();
-    images= imageUploader.imageData;
-
-
-    for (byte[] imageData : imageUploader) {
-
-      // Process each image data (e.g., save to database or file system)
-      System.out.println("Received image of size: " + imageData.length + " bytes");
+  public String uploadImage(@RequestParam("images") MultipartFile[] imageUploader,@AuthenticationPrincipal UserEntity user) {
+    List<byte[]> imageList = new ArrayList<>();
+    for (MultipartFile file : imageUploader) {
+      try {
+        byte[] imageData = file.getBytes();
+        imageList.add(imageData);
+      } catch (Exception e) {
+        e.printStackTrace();
+        return "Failed to upload images.";
+      }
     }
+    UserDetailsEntity userDetails = user.getUserDetails();
+    userDetails.setGrommingImages(imageList);
+    user.setUserDetails(userDetails);
+    userRepository.save(user);
     return "Image uploaded successfully!";
   }
 }
