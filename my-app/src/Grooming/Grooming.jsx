@@ -22,17 +22,29 @@ export default function MensGrooming() {
   };
 
   const SaveToDB = async () => {
-    try{
-      const response=await axios.post("http://localhost:8000/api/uploadImage",
-      { images: selectedFiles },
-      {  headers: { Authorization: `Bearer ${stateToken}` },
-    }
-      );
-      console.log(response);
-    }
-    catch(err){
-      console.error("Error uploading images:", err);
-    }
+    try {
+  const formData = new FormData();
+  selectedFiles.forEach((file) => {
+    formData.append("images", file);
+  });
+
+  const response = await axios.post("http://localhost:8000/api/uploadImage", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${stateToken}`,
+    },
+  });
+  if(response.status===403){
+    const response12 = await axios.post("http://localhost:8000/api/refresh-token",{
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${stateToken}`,
+    },
+    //alert("Session expired. Please login again.");
+  })
+  console.log("Upload success:", response.data);
+} 
+
 
   }
 

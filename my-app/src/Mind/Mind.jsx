@@ -54,7 +54,8 @@ And in every story, he finds a new piece of himself he never knew was missing."`
         Mental Health
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
+      <div className="grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(500px,1fr))]">
+
         {mindTopics.map((topic, idx) => (
           <div
             key={idx}

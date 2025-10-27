@@ -14,6 +14,11 @@
 
 /* Additional styles can be added here as needed */
 
+.h {
+  font-size: medium;
+  font-size: 30px;
+  font-weight: bold;
+}
 .outermostContainer {
   background: 
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
@@ -26,4 +31,33 @@
   width: 100vw;
   color: #F5E8D8;
   font-family: serif;
+}
+
+
+@media screen and (min-width: 1500px) {
+  .outermostContainer {
+    font-size:large;
+  }
+}
+
+
+.outermostContainer {
+  font-size: 1.125rem; /* roughly Tailwind's text-lg */
+  line-height: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .outermostContainer {
+    font-size: 1.25rem; /* text-xl on larger screens */
+    line-height: 1.85rem;
+  }
+}
+.outermostContainer h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.outermostContainer h2 {
+  font-size: 2rem;
+  font-weight: 600;
 }
