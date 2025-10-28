@@ -12,6 +12,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,8 +32,7 @@ public class UserDetailsEntity {
   @Lob
   @Column(columnDefinition = "TEXT")
   private String Checklist;
-
-  private List<byte[]> GrommingImages;
+  
   @OneToOne(mappedBy = "userDetails")
   private UserEntity user;
 
@@ -41,13 +41,7 @@ public class UserDetailsEntity {
 
   }
 
-  public void setGrommingImages(List<byte[]> GrommingImages) {
-    this.GrommingImages = GrommingImages;
-  }
 
-  public List<byte[]> getGrommingImages() {
-    return GrommingImages;
-  }
 
   public long getId() {
     return Id;

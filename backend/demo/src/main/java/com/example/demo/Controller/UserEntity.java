@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.Entity.ImagesUpload;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import io.jsonwebtoken.lang.Collections;
@@ -44,6 +45,8 @@ public class UserEntity implements UserDetails {
   @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,cascade = { jakarta.persistence.CascadeType.ALL })
   private List<PermissionEntity> permissions;
 
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,cascade = { jakarta.persistence.CascadeType.ALL })
+  private List<ImagesUpload> images;
   public UserEntity() {
 
   }
@@ -87,6 +90,14 @@ public class UserEntity implements UserDetails {
   public void setUserDetails(UserDetailsEntity userDetails) {
     this.userDetails = userDetails;
   }
+
+  public List<ImagesUpload> getImages() {
+    return images;
+  } 
+
+  public void setImages(List<ImagesUpload> images) {
+    this.images = images;
+  } 
 
   @Override
   public String toString() {

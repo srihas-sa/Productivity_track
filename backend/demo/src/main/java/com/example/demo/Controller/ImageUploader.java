@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.Entity.ImagesUpload;
 import com.example.demo.Repository.UserRepository;
 
 
@@ -39,15 +40,19 @@ public class ImageUploader {
       try {
         byte[] imageData = file.getBytes();
         imageList.add(imageData);
+        List<ImagesUpload> existingImages = user.getImages();
+        ImagesUpload newImage = new ImagesUpload(imageData, user);
+        existingImages.add(newImage);
+        user.setImages(existingImages);
+        userRepository.save(user);
       } catch (Exception e) {
-        e.printStackTrace();
-        return "Failed to upload images.";
+        return "Failed to upload images: " + e.getMessage();
       }
     }
-    UserDetailsEntity userDetails = user.getUserDetails();
-    userDetails.setGrommingImages(imageList);
-    user.setUserDetails(userDetails);
-    userRepository.save(user);
+    //UserDetailsEntity userDetails = user.getUserDetails();
+    //userDetails.setGrommingImages(imageList);
+    //user.setUserDetails(userDetails);
+    //userRepository.save(user);
     return "Image uploaded successfully!";
   }
 }

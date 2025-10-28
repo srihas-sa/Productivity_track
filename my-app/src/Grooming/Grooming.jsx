@@ -34,19 +34,13 @@ export default function MensGrooming() {
       Authorization: `Bearer ${stateToken}`,
     },
   });
-  if(response.status===403){
-    const response12 = await axios.post("http://localhost:8000/api/refresh-token",{
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${stateToken}`,
-    },
-    //alert("Session expired. Please login again.");
-  })
+  
   console.log("Upload success:", response.data);
 } 
-
+catch (error) { 
 
   }
+}
 
   // Remove image
   const removeImage = (indexToRemove) => {
