@@ -18,21 +18,22 @@ const HomePage = () => {
   localStorage.getItem('email') || window.location.replace('/login');
   
   return (
-    <div className="outermostContainer flex flex-col min-h-screen text-[#F5E8D8] font-serif w-full">
+    <div className="outermostContainer flex flex-col min-h-screen text-[#F5E8D8] font-serif w-full max-w-full overflow-x-hidden">
   <header className="bg-gray-800 text-white p-4 fixed top-0 w-full z-10">
     <Navbar />
   </header>
 
   <div className="flex flex-col flex-1 pt-20 pb-16 min-h-screen">
     <div className="flex flex-col md:flex-row w-full flex-1">
-      <aside className="p-4 w-full md:w-1/4 md:h-screen md:sticky md:top-20 bg-opacity-70 backdrop-blur-sm">
-        <Sidebar />
-      </aside>
+  <aside className="w-full md:w-1/4 p-4 md:h-screen md:sticky md:top-20 bg-opacity-70 backdrop-blur-sm">
+    <Sidebar />
+  </aside>
 
-      <main className="p-4 mb-5 w-full md:w-3/4 overflow-y-auto bg-opacity-60 backdrop-blur-sm">
-        <Main />
-      </main>
-    </div>
+  <main className="w-full md:w-3/4 p-4 mb-5 overflow-y-auto bg-opacity-60 backdrop-blur-sm">
+    <Main />
+  </main>
+</div>
+
 
     <section id="Mind">
       <Mind />

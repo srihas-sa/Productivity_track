@@ -4,7 +4,7 @@ import Store from "../App/Store.js"; // your Redux store
 import { setCredentials } from "../Features/practice";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "http://10.248.227.126:8000/api",
   withCredentials: true, // Important for sending cookies
 });
 

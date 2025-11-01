@@ -100,27 +100,28 @@ export default function IdeasAndBlog() {
         {/* 🧠 Ideas Section */}
         <div className="bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-2xl transition">
           <h2 className="text-2xl font-semibold mb-4">💡 Ideas</h2>
-          <div className="flex items-center gap-2 mb-4">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Write your idea..."
-              className="flex-1 px-3 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              onClick={addIdea}
-              className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg flex items-center gap-1"
-            >
-              <Plus size={18} /> Add
-            </button>
-            <button
-              onClick={SaveIdeas}
-              className="bg-green-600 hover:bg-blue-700 px-3 py-2 rounded-lg flex items-center gap-1"
-            >
-               Save
-            </button>
-          </div>
+          <div className="flex flex-wrap items-center gap-2 mb-4 w-full">
+  <input
+    type="text"
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    placeholder="Write your idea..."
+    className="w-full md:flex-1 px-3 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  <button
+    onClick={addIdea}
+    className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg flex items-center gap-1"
+  >
+    <Plus size={18} /> Add
+  </button>
+  <button
+    onClick={SaveIdeas}
+    className="bg-green-600 hover:bg-green-700 px-3 py-2 rounded-lg flex items-center gap-1"
+  >
+    Save
+  </button>
+</div>
+
 
           <ul className="space-y-3">
             {ideas.length === 0 && (

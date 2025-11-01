@@ -1,37 +1,20 @@
-/*
 .outermostContainer {
   background: 
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url('../Images/BackgroundImageTry.png') center/cover no-repeat;
-  height: 100vh;
-  width: 100%;
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
-*/
 
-/* Additional styles can be added here as needed */
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-.h {
-  font-size: medium;
-  font-size: 30px;
-  font-weight: bold;
-}
-.outermostContainer {
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-    url('../Images/BackgroundImageTry.png') center/cover no-repeat;
-  background-attachment: fixed;   /* Keeps the image fixed when scrolling */
-  background-size: cover;         /* Make it fill the entire area */
-  background-position: center;    /* Center the image */
-  background-repeat: no-repeat;   /* Prevent tiling */
-  min-height: 100vh;
-  width: 100vw;
+  min-height: 100dvh; /* ✅ dynamic viewport height for mobile */
+  width: 100vw;       /* ✅ ensures full width */
+
   color: #F5E8D8;
   font-family: serif;
 }
+
 
 
 @media screen and (min-width: 1500px) {

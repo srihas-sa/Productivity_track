@@ -21,6 +21,10 @@ export default function Mind() {
     navigate('/BrainTeasers');
   };
 
+  const handleClick4 = () => {
+    navigate('/hobbies');
+  };
+
   const mindTopics = [
     {
       title: 'Books and Positive Mindset',
@@ -45,6 +49,7 @@ And in every story, he finds a new piece of himself he never knew was missing."`
       title: 'Goals',
       desc: `"With every click, ask: is this building or breaking my focus? Technology should speed you up, not scatter you. Use it as a compass, not a distraction — let it guide your goals, not pull you from them."`,
       img: Technologmage,
+      buttonAction: handleClick4,
     },
   ];
 
@@ -54,7 +59,7 @@ And in every story, he finds a new piece of himself he never knew was missing."`
         Mental Health
       </h1>
 
-      <div className="grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(500px,1fr))]">
+      <div className="grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(500px,1fr))]">
 
         {mindTopics.map((topic, idx) => (
           <div

@@ -40,7 +40,7 @@ export default function Phyical() {
         Body
       </h1>
 
-      <div className="grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(500px,1fr))]">
+      <div className="grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(250,1fr))] md:grid-cols-[repeat(auto-fit,minmax(500px,1fr))]">
         {physicalTopics.map((topic, idx) => (
           <div
             key={idx}
