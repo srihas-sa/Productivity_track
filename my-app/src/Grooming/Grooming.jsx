@@ -21,6 +21,17 @@ export default function MensGrooming() {
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
+  const GetfromDB=async()=>{
+    try {
+      const res = await axios.get("http://localhost:8000/api/getImages", {
+        headers: { Authorization: `Bearer ${stateToken}` },
+      });
+      console.log("Fetched images from server:", res.data);
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    } 
+  }
+
   const SaveToDB = async () => {
     try {
   const formData = new FormData();
@@ -189,6 +200,7 @@ catch (error) {
             
           />
           <button onClick={SaveToDB} className="bg-green-600 hover:bg-blue-700 px-3 py-2 rounded-lg flex items-center gap-1">Save</button>
+          <button onClick={GetfromDB} className="bg-green-600 hover:bg-blue-700 px-3 py-2 rounded-lg flex items-center gap-1">Get</button>
         </div>
 
         <div className="mt-6 grid grid-cols-3 gap-4">

@@ -41,6 +41,7 @@ public class ImageUploader {
         byte[] imageData = file.getBytes();
         imageList.add(imageData);
         List<ImagesUpload> existingImages = user.getImages();
+        System.out.println("Existing Images: " + existingImages.size());
         ImagesUpload newImage = new ImagesUpload(imageData, user);
         existingImages.add(newImage);
         user.setImages(existingImages);
@@ -54,5 +55,11 @@ public class ImageUploader {
     //user.setUserDetails(userDetails);
     //userRepository.save(user);
     return "Image uploaded successfully!";
+  }
+
+
+  @GetMapping("/getImages")
+  public List<ImagesUpload> getImages(@AuthenticationPrincipal UserEntity user) {
+    return user.getImages();
   }
 }

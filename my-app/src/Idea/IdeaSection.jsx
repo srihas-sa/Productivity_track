@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { use, useState ,useEffect} from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import {reducer} from '../Features/practice';
@@ -80,6 +80,15 @@ export default function IdeasAndBlog() {
   const clicktotoken=()=>{
     console.log("Token from Redux Store:",stateToken);
   }
+
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/user/ideas", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    })
+    .then(res => setIdeas(res.data))
+    .catch(err => console.log(err));
+  }, []);
 
   return (
     <div className="min-h-screen  text-white p-6">
