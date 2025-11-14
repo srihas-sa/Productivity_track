@@ -23,7 +23,7 @@ export default function MensGrooming() {
 
   const GetfromDB=async()=>{
     try {
-      const res = await axios.get("http://localhost:8000/api/getImages", {
+      const res = await axios.get("http://LAPTOP-NB1T57HU:8000/api/getImages", {
         headers: { Authorization: `Bearer ${stateToken}` },
       });
       console.log("Fetched images from server:", res.data);

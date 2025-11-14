@@ -12,8 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 
-import com.example.demo.Controller.UserDetailsEntity;
-import com.example.demo.Controller.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import io.jsonwebtoken.lang.Collections;

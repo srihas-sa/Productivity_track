@@ -23,7 +23,7 @@ export default function SignUp() {
 
     try {
       // Replace with your backend signup API
-      const response = await axios.post("http://10.248.227.126:8000/api/signup", {
+      const response = await axios.post("http://LAPTOP-NB1T57HU:8000/api/signup", {
         name,
         email,
         password,

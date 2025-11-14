@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Entity.ImagesUpload;
+import com.example.demo.Entity.UserEntity;
 import com.example.demo.Repository.UserRepository;
 
 

@@ -1,7 +1,9 @@
-package com.example.demo.Controller;
+package com.example.demo.Entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
@@ -36,6 +38,11 @@ public class UserDetailsEntity {
   @OneToOne(mappedBy = "userDetails")
   private UserEntity user;
 
+  @CreationTimestamp
+  private CreationTimestamp createdTimeStamp;
+
+  @UpdateTimestamp
+  private UpdateTimestamp updatedTimeStamp;
 
   public UserDetailsEntity() {
 

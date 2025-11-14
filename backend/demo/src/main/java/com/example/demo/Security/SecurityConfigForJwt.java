@@ -8,7 +8,7 @@ import com.example.demo.AuthFilter.JWTRefreshFilter;
 //import com.conceptandcoding.learningspringboot.JWT.filters.JwtValidationFilter;
 import com.example.demo.AuthFilter.JWTUtil;
 import com.example.demo.AuthFilter.JWTValidationFilter;
-import com.example.demo.Controller.UserEntity;
+import com.example.demo.Entity.UserEntity;
 import com.example.demo.Service.SaveuserDetail;
 
 import jakarta.servlet.Filter;

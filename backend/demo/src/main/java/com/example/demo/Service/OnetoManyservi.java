@@ -12,8 +12,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Controller.OneToManyPare;
-import com.example.demo.Controller.UserEntity;
 import com.example.demo.Controller.UserSpecification;
+import com.example.demo.Entity.UserEntity;
 import com.example.demo.Repository.OneToManyRepo;
 import com.example.demo.Repository.UserRepository;
 

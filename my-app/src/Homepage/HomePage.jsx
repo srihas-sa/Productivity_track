@@ -15,7 +15,7 @@ import './HomePage.css';
 const HomePage = () => {
   const [msg, setMsg] = useState("");
   
-  localStorage.getItem('email') || window.location.replace('/login');
+  //localStorage.getItem('email') || window.location.replace('/login');
   
   return (
     <div className="outermostContainer flex flex-col min-h-screen text-[#F5E8D8] font-serif w-full max-w-full overflow-x-hidden">

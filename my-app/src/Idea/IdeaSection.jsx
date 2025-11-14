@@ -24,7 +24,7 @@ export default function IdeasAndBlog() {
     const blogData = blogInput;
     console.log(blogData);
     try{
-      const res=await axios.post("http://localhost:8000/api/blog", { 
+      const res=await axios.post("http://LAPTOP-NB1T57HU:8000/api/blog", { 
          Blogs: blogData },
         {  headers: { Authorization: `Bearer ${stateToken}` },
       }

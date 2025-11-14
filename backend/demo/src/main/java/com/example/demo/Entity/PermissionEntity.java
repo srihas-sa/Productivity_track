@@ -1,4 +1,6 @@
-package com.example.demo.Controller;
+package com.example.demo.Entity;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,8 @@ public class PermissionEntity {
   @JoinColumn(name = "user_id") // foreign key in PermissionEntity
   private UserEntity user;
 
+  @CreationTimestamp
+  private CreationTimestamp createdtime;
   public PermissionEntity() {
 
   }
@@ -42,6 +46,10 @@ public class PermissionEntity {
 
   public UserEntity getUser() {
     return user;
+  }
+
+  public CreationTimestamp getCreatedTimestamp(){
+    return createdtime;
   }
 
   public void setUser(UserEntity user) {

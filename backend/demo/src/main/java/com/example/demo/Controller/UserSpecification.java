@@ -2,6 +2,8 @@ package com.example.demo.Controller;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.example.demo.Entity.UserEntity;
+
 public class UserSpecification {
 
   public static Specification<UserEntity> hasName(String name) {

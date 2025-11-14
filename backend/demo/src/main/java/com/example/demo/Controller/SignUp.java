@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Entity.PermissionEntity;
+import com.example.demo.Entity.UserDetailsEntity;
+import com.example.demo.Entity.UserEntity;
+import com.example.demo.Model.UserRoles;
 import com.example.demo.Service.OnetoManyservi;
 import com.example.demo.Service.SaveuserDetail;
 
@@ -40,13 +44,17 @@ public class SignUp {
   @Autowired
   private PasswordEncoder PasswordEncoder;
 
+  @Autowired
+  private UserRoles userRoles;
+  
   @PostMapping("/signup")
   public String saveUser(@RequestBody UserEntity entity) {
     UserEntity user = new UserEntity();
     user.setName(entity.getName());
     user.setPassword(PasswordEncoder.encode(entity.getPassword()));
     user.setEmail(entity.getEmail());
-    user.setRole(entity.getRole());
+    
+    user.setRole(userRoles.CUSTOMER.name());
     UserDetailsEntity details = new UserDetailsEntity();
     //System.out.println("Blog details: " + entity.getUserDetails().getBlogDet());
     List<PermissionEntity> perm = entity.getPermissions();
