@@ -1,11 +1,13 @@
-package com.example.demo.Entity;
+package com.example.demo.EntityList;
 //import java.security.Permission;
 import java.security.Permissions;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -42,6 +44,11 @@ public class ImagesUpload {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdTime;
+
 
     public ImagesUpload() {
     }

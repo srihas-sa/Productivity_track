@@ -2,8 +2,8 @@ package com.example.demo.Controller;
 
 import java.util.List;
 
-import com.example.demo.Entity.PermissionEntity;
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.PermissionEntity;
+import com.example.demo.EntityList.UserEntity;
 
 public class LoginDTO {
   private String email;

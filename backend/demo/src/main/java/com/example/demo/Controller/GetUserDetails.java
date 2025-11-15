@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Entity.UserDetailsEntity;
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.UserDetailsEntity;
+import com.example.demo.EntityList.UserEntity;
 
 @RestController
 @RequestMapping("/api")

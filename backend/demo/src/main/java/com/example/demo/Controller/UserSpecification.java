@@ -2,7 +2,7 @@ package com.example.demo.Controller;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.UserEntity;
 
 public class UserSpecification {
 

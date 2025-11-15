@@ -2,7 +2,7 @@
 package com.example.demo.AuthFilter;
 
 import com.example.demo.AuthFilter.JwtAuthenticationToken;
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.UserEntity;
 import com.example.demo.Service.SaveuserDetail;
 import com.example.demo.AuthFilter.JWTUtil;
 import org.springframework.security.authentication.AuthenticationProvider;

@@ -8,7 +8,7 @@ import com.example.demo.AuthFilter.JWTRefreshFilter;
 //import com.conceptandcoding.learningspringboot.JWT.filters.JwtValidationFilter;
 import com.example.demo.AuthFilter.JWTUtil;
 import com.example.demo.AuthFilter.JWTValidationFilter;
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.UserEntity;
 import com.example.demo.Service.SaveuserDetail;
 
 import jakarta.servlet.Filter;
@@ -85,7 +85,7 @@ public class SecurityConfigForJwt {
     // authenticationManager);
 
     http.authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/signup", "/api/login", "http://localhost:3000").permitAll()
+        .requestMatchers("/api/signup", "/api/login", "http://localhost:3000" ,"/api/testing").permitAll()
         // .requestMatchers("/api/login")
         .anyRequest().authenticated())
         .sessionManagement(session -> session

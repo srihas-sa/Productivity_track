@@ -1,5 +1,6 @@
-package com.example.demo.Entity;
+package com.example.demo.EntityList;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,10 +40,12 @@ public class UserDetailsEntity {
   private UserEntity user;
 
   @CreationTimestamp
-  private CreationTimestamp createdTimeStamp;
+  @Column(updatable = false)
+  private LocalDateTime createdTime;
+
 
   @UpdateTimestamp
-  private UpdateTimestamp updatedTimeStamp;
+  private LocalDateTime updatedTimeStamp;
 
   public UserDetailsEntity() {
 

@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.UserEntity;
 
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 

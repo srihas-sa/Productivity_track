@@ -2,7 +2,7 @@ package com.example.demo.Repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.UserEntity;
 
 import java.util.List;
 

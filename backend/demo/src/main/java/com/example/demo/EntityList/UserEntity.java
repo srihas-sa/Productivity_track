@@ -1,7 +1,8 @@
-package com.example.demo.Entity;
+package com.example.demo.EntityList;
 
 //import java.security.Permission;
 import java.security.Permissions;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -39,8 +40,12 @@ public class UserEntity implements UserDetails {
   private String email;
   private String password;
   private String role;
+  
+  
   @CreationTimestamp
-  private CreationTimestamp Createdtime;
+  @Column(updatable = false)
+  private LocalDateTime createdTime;
+
   @OneToOne(cascade = { jakarta.persistence.CascadeType.ALL })
   private UserDetailsEntity userDetails;
 

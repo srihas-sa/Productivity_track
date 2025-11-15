@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.example.demo.Controller.OneToManyPare;
-import com.example.demo.Entity.UserEntity;
+import com.example.demo.EntityList.UserEntity;
 
 @Repository
 public interface OneToManyRepo extends JpaRepository<OneToManyPare, Long>, JpaSpecificationExecutor<UserEntity> {
