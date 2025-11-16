@@ -1,14 +1,20 @@
 package com.example.demo.EntityList;
 
 
+
+
+import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 
 @Entity
+
 @Table(name = "CategoryProductList")
 public class CategoryEntity {
   @Id
@@ -25,6 +31,8 @@ public class CategoryEntity {
   public void setName(String name) {
     this.name = name;
   }
+
+  @NotBlank
   private String name;
 
   

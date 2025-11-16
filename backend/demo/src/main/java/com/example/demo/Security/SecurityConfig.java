@@ -11,10 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
-// @EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
-  @Bean
+    @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
@@ -23,8 +23,8 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable());
     http.authorizeHttpRequests(
-        auth -> auth.requestMatchers("/api/signup", "/api/login", "http://localhost:3000").permitAll()
-            .anyRequest().authenticated())
+        auth -> auth.requestMatchers("/api/signup", "/api/login", "api/testing/**").permitAll())
+            //.anyRequest().authenticated())
         // httpBasic(Customizer.withDefaults());
         .cors(cors -> {
         });

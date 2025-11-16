@@ -7,6 +7,8 @@ import com.example.demo.EntityList.CategoryEntity;
 import com.example.demo.Interface.ICategoryService;
 import com.example.demo.Service.ProCategoryService;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class CategoryController {
   @Autowired
   public ProCategoryService catgoryservicce;
 
-  @GetMapping("/get-categories")
+  @GetMapping("/getCategories")
   public ResponseEntity getCategoryList() {
     List<CategoryEntity> ll= catgoryservicce.getAllCategory();
     if(ll==null){
@@ -39,24 +41,24 @@ public class CategoryController {
   }
 
   @PostMapping("/addCategory")
-  public ResponseEntity AddCategory(@RequestBody String entity) {
+  public ResponseEntity AddCategory(@Valid @RequestBody CategoryEntity entity) {
       //TODO: process POST request
       CategoryEntity ca= new CategoryEntity();
-      ca.setName(entity);
-      String response=catgoryservicce.addCategory(ca);
-
+      //ca.setName(entity);
+      String response=catgoryservicce.addCategory(entity);
+    System.out.println("inside Category"+response);
       if(response!="Success"){
-        new ResponseEntity<>("Error In Creation ", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Error In Creation ", HttpStatus.NOT_FOUND);
       }
       return new ResponseEntity<>("Success",HttpStatus.FOUND);
   }
   
 
   @PostMapping("/removeCategory")
-  public ResponseEntity deleteCategory(@RequestBody String entity) {
+  public ResponseEntity deleteCategory(@RequestBody CategoryEntity entity) {
       //TODO: process POST request
       CategoryEntity ca= new CategoryEntity();
-      ca.setName(entity);
+      ca.setName(entity.getName());
       String response=catgoryservicce.removeCategory(ca);
       if(response!="Success"){
         new ResponseEntity<>("Error In Creation ", HttpStatus.NOT_FOUND);

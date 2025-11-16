@@ -24,10 +24,13 @@ public class ProCategoryService implements ICategoryService{
   }
   public String addCategory(CategoryEntity ca){
     try{
-    catSerRepo.save(ca);
+      System.out.println("in category Service "+ca+"1");
+    CategoryEntity ce=catSerRepo.save(ca);
+    System.out.println("in category Service "+ce);
   
     }
     catch(Exception err){
+      System.out.println(err);
       return "Failure";
     }
     return "Success";

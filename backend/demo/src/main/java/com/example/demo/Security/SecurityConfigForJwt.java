@@ -39,7 +39,13 @@ import java.util.Arrays;
 @Configuration
 //@EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+
 public class SecurityConfigForJwt {
+/* 
+   @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
   private JWTUtil jwtUtil;
   private SaveuserDetail userDetailsService;
@@ -63,11 +69,8 @@ public class SecurityConfigForJwt {
     return provider;
   }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
-
+ 
+  /* 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager,
       JWTUtil jwtUtil) throws Exception {
@@ -83,11 +86,11 @@ public class SecurityConfigForJwt {
     // refresh filter for checking JWT in every request
     // JWTRefreshFilter jwtRefreshFilter = new JWTRefreshFilter(jwtUtil,
     // authenticationManager);
-
+         /* 
     http.authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/signup", "/api/login", "http://localhost:3000" ,"/api/testing").permitAll()
+        .requestMatchers("/api/signup", "/api/login" ,"/api/testing").permitAll())
         // .requestMatchers("/api/login")
-        .anyRequest().authenticated())
+        //.anyRequest().authenticated())
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .csrf(csrf -> csrf.disable())
@@ -100,8 +103,15 @@ public class SecurityConfigForJwt {
     // validate token filter
     // .addFilterAfter(jwtRefreshFilter, JwtValidationFilter.class); // refresh
     // token filter
-    return http.build();
+   
+
+    
+     return http.build();
   }
+
+  */
+
+  /* 
 
   @Bean
   public AuthenticationManager authenticationManager() {
@@ -110,4 +120,6 @@ public class SecurityConfigForJwt {
         jwtAuthenticationProvider()));
   }
 
+  
+*/
 }
