@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.EntityList.CategoryEntity;
+import com.example.demo.Exception.ResourceNotFound21;
 import com.example.demo.Interface.ICategoryService;
 import com.example.demo.Service.ProCategoryService;
 
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,40 +32,34 @@ public class CategoryController {
   @Autowired
   public ProCategoryService catgoryservicce;
 
-  @GetMapping("/getCategories")
-  public ResponseEntity getCategoryList() {
-    List<CategoryEntity> ll= catgoryservicce.getAllCategory();
-    if(ll==null){
-        new ResponseEntity<>("Error In Creation ", HttpStatus.NOT_FOUND);
-      }
-      return new ResponseEntity<>(ll,HttpStatus.FOUND);
+  public ResourceNotFound21 re;
+
+  @GetMapping("/getCategorie/{id}")
+  public ResponseEntity getCategoryById(@PathVariable("id") long id) {
+    CategoryEntity s=catgoryservicce.getcategoryByid(id);
+    return new ResponseEntity<>(s, HttpStatus.FOUND);
      
   }
 
+
+
+
   @PostMapping("/addCategory")
   public ResponseEntity AddCategory(@Valid @RequestBody CategoryEntity entity) {
-      //TODO: process POST request
-      CategoryEntity ca= new CategoryEntity();
-      //ca.setName(entity);
+      
       String response=catgoryservicce.addCategory(entity);
     System.out.println("inside Category"+response);
-      if(response!="Success"){
-        return new ResponseEntity<>("Error In Creation ", HttpStatus.NOT_FOUND);
-      }
-      return new ResponseEntity<>("Success",HttpStatus.FOUND);
+      
+      return new ResponseEntity<>("Category Added Successfully"+entity.getName(),HttpStatus.FOUND);
   }
   
 
-  @PostMapping("/removeCategory")
-  public ResponseEntity deleteCategory(@RequestBody CategoryEntity entity) {
-      //TODO: process POST request
-      CategoryEntity ca= new CategoryEntity();
-      ca.setName(entity.getName());
-      String response=catgoryservicce.removeCategory(ca);
-      if(response!="Success"){
-        new ResponseEntity<>("Error In Creation ", HttpStatus.NOT_FOUND);
-      }
-      return new ResponseEntity<>("Success",HttpStatus.FOUND);
-  }
+  @PostMapping("/removeCategory/{id}")
+public ResponseEntity<?> deleteCategory(@PathVariable("id") long id) {
+
+    String response = catgoryservicce.removeCategory(id);
+    return new ResponseEntity<>("Deleted Successfully"+id, HttpStatus.OK);
+}
+
   
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -33,6 +34,7 @@ public class CategoryEntity {
   }
 
   @NotBlank
+  @Size(min=5,message="Size must be above 5!")
   private String name;
 
   

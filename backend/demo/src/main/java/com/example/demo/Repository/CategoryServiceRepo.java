@@ -8,5 +8,5 @@ import com.example.demo.EntityList.CategoryEntity;
 
 @Repository
 public interface CategoryServiceRepo extends JpaRepository<CategoryEntity,Long> {
-  
+  public CategoryEntity findByName(String str);
 }
