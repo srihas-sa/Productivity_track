@@ -30,6 +30,22 @@ public class GlobalExceptionManager {
   }
 
 
+  @ExceptionHandler(ConstraintViolationException.class)
+public ResponseEntity<Map<String, String>> handleConstraintViolation(ConstraintViolationException ex) {
+    
+    Map<String, String> errors = new HashMap<>();
+
+    ex.getConstraintViolations().forEach(cv -> {
+        String field = cv.getPropertyPath().toString();
+        String message = cv.getMessage();
+        errors.put(field, message);
+    });
+
+    return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+}
+
+
+
   @ExceptionHandler(ResourceNotFound21.class)
   public ResponseEntity<String> getResourceNotFoundException(ResourceNotFound21 me){
     //ResponseEntity resMethArgNotValid;
