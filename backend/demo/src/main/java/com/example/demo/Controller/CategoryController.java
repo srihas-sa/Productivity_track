@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Config.AppConstants;
 import com.example.demo.DTO.CategoryDto;
 import com.example.demo.DTO.CategoryResponseDto;
 import com.example.demo.EntityList.CategoryEntity;
@@ -15,6 +16,8 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,8 +50,14 @@ public class CategoryController {
   
 
   @GetMapping("/getcategories")
-  public ResponseEntity<CategoryResponseDto> getCategories(){
-    CategoryResponseDto ll=catgoryservicce.getAllCategory();
+  public ResponseEntity<CategoryResponseDto> getCategories(
+    @RequestParam(defaultValue = AppConstants.page_Number,required = false) int pageNumber,
+    @RequestParam(defaultValue = AppConstants.page_Size,required = false) int pageSize,
+    @RequestParam(defaultValue = AppConstants.sortBy,required = false) String sort_By,
+    @RequestParam(defaultValue = AppConstants.sortOrder,required = false) String sortOrder){
+    
+    System.out.println(pageNumber+" "+pageSize);
+    CategoryResponseDto ll=catgoryservicce.getAllCategory(pageNumber,pageSize,sort_By,sortOrder);
     return new ResponseEntity<>(ll, HttpStatus.OK);
   }
 

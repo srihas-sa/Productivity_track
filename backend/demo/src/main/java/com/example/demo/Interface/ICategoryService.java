@@ -7,7 +7,7 @@ import com.example.demo.DTO.CategoryResponseDto;
 import com.example.demo.EntityList.CategoryEntity;
 
 public interface ICategoryService {
-  public CategoryResponseDto getAllCategory();
+  public CategoryResponseDto getAllCategory(int pageNumber,int pageSize,String sortBy,String sortOrder);
   public CategoryDto addCategory(CategoryDto categoryDtoo);
   public CategoryDto removeCategory(long id);
   public CategoryDto Updatecategory(CategoryDto ca,long id);

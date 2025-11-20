@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 import org.apache.el.stream.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -30,16 +34,23 @@ public class ProCategoryService implements ICategoryService{
   @Autowired
   public ModelMapper modelMap;
 
-  public CategoryResponseDto getAllCategory(){
-    List<CategoryEntity> ls=null;
-
-    ls=catSerRepo.findAll();
+  public CategoryResponseDto getAllCategory(int pageNo,int pageSize,String sortBy,String sortOrder){
+    Sort sortedll=sortOrder.equals("asc")?Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
+    Pageable pableDet=PageRequest.of(pageNo, pageSize,sortedll);
+    Page<CategoryEntity> pageList=catSerRepo.findAll(pableDet);
+    List<CategoryEntity> ls=pageList.getContent();
     if(ls.size()==0){
       throw new ApiException("There were no Category To Fetch Try Adding one");
     }
     List<CategoryDto> listOfCollDto=ls.stream().map(category -> modelMap.map(category,CategoryDto.class)).toList();
-
-    return new CategoryResponseDto(listOfCollDto);
+    CategoryResponseDto cateRespPageDetails=new CategoryResponseDto();
+    cateRespPageDetails.setCategorylist(listOfCollDto);
+    cateRespPageDetails.setLastPage(pageList.isLast());
+    cateRespPageDetails.setTotalElements(pageList.getTotalElements());
+    cateRespPageDetails.setTotalpages(pageList.getTotalPages());
+    cateRespPageDetails.setPageNumber(pageNo);
+    cateRespPageDetails.setPageSize(pageSize);
+    return cateRespPageDetails;
   }
 
   public CategoryDto getcategoryByid(long id){
