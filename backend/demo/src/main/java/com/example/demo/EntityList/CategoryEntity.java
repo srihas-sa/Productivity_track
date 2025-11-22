@@ -3,6 +3,11 @@ package com.example.demo.EntityList;
 
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +27,8 @@ public class CategoryEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @OneToMany(mappedBy = "category_id" ,cascade = CascadeType.ALL)
+  private List<ProductEntity> productlist;
   public long getId() {
     return id;
   }
