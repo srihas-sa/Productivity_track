@@ -1,9 +1,16 @@
 package com.example.demo.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.CategoryDto;
@@ -15,21 +22,29 @@ import com.example.demo.Exception.ApiException;
 import com.example.demo.Repository.CategoryServiceRepo;
 import com.example.demo.Repository.ProductRepo;
 
+import jakarta.validation.Valid;
+
 @Service
 public class ProductServiceimpl implements IProductServive{
 
   @Autowired
-  public ProductRepo productRepo;
+  private ProductRepo productRepo;
 
   @Autowired
-  public ModelMapper modelMapper;
+  private ModelMapper modelMapper;
 
 
   @Autowired
-  public ProCategoryService proCategoryService;
+  private ProCategoryService proCategoryService;
 
   @Autowired
-  public CategoryServiceRepo categoryServiceRepo;
+  private CategoryServiceRepo categoryServiceRepo;
+
+  @Autowired
+  private FileServiceImpl fileServiceImpl;
+
+  @Value("${project.image.upload.dir}")
+  private String path;
   @Override
   public ProductDto getProductById(long id) {
     ProductEntityclass response=productRepo.findById(id).orElseThrow(()->new ApiException("No product to show with mentioned id"+id));
@@ -38,16 +53,16 @@ public class ProductServiceimpl implements IProductServive{
   }
 
   @Override
-  public ProductDto addProduct(ProductEntityclass product,long categoryId) {
+  public ProductDto addProduct(ProductDto productDetails,long categoryId) {
     // TODO Auto-generated method stub
 
     CategoryEntity response=categoryServiceRepo.findById(categoryId).orElseThrow(()->new ApiException("No Category found with mentioned id"+categoryId));
     //CategoryEntity category=modelMapper.map(response, CategoryEntity.class);
-    ProductEntityclass response1=null;
+    ProductEntityclass response1=modelMapper.map(productDetails, ProductEntityclass.class);
     if(response!=null){   
-      product.setCategory(response);
-      product.setSpecialPrice(product.getPrice() - (product.getPrice() * (product.getDiscount() / 100.0)));
-      response1=productRepo.save(product);
+      response1.setCategory(response);
+      response1.setSpecialPrice(response1.getPrice() - (response1.getPrice() * (response1.getDiscount() / 100.0)));
+      response1=productRepo.save(response1);
       return modelMapper.map(response1, ProductDto.class);
     }
     else{
@@ -64,6 +79,7 @@ public class ProductServiceimpl implements IProductServive{
     if(response!=null){
       productRepo.deleteById(id);
     }
+    System.out.println("In service layer remove product"+response.getDescription());
     ProductDto prodt=modelMapper.map(response, ProductDto.class);
     return prodt;
   }
@@ -118,6 +134,21 @@ public class ProductServiceimpl implements IProductServive{
 
     ProductEntityclass response2=productRepo.save(existingProduct);
     return modelMapper.map(response2,ProductDto.class); 
+  }
+
+
+  public ProductDto addProductImage( @Valid  org.springframework.web.multipart.MultipartFile image, long productId) throws IOException {
+    ProductEntityclass existingProduct=productRepo.findById(productId).orElseThrow(()->new ApiException("No product to Update with mentioned id"+productId));
+    String imageName=image.getOriginalFilename();
+    
+    String uploadedFileName=fileServiceImpl.uploadImage(path,image);
+    existingProduct.setImage(uploadedFileName);
+        System.out.println("File is Uploading.....1 settingImage");
+
+    ProductEntityclass savedexistingProduct=productRepo.save(existingProduct);
+        System.out.println("File is Uploading.....1 Saving Image ");
+
+    return modelMapper.map(savedexistingProduct, ProductDto.class);
   }
 
    

@@ -42,7 +42,7 @@ public class ProductEntityclass {
     @CreationTimestamp
     private LocalDateTime updatedTime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 

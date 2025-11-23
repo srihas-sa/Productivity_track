@@ -9,7 +9,7 @@ import com.example.demo.EntityList.ProductEntityclass;
 
 public interface IProductServive {
   public ProductDto getProductById(long id);
-  public ProductDto addProduct(ProductEntityclass product,long categoryId);
+  public ProductDto addProduct( ProductDto product,long categoryId);
   public ProductDto removeProduct(long product);
   public Productresponse getProductsByCateId(long id); // Product based on Category Id;
   public Productresponse getAllProducts();  //All Products

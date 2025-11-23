@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.DTO.CategoryDto;
 import com.example.demo.DTO.ProductDto;
@@ -10,6 +11,8 @@ import com.example.demo.EntityList.ProductEntityclass;
 import com.example.demo.Service.ProductServiceimpl;
 
 import jakarta.validation.Valid;
+
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +36,7 @@ public class ProductController {
   public ProductServiceimpl productService;
 
   @PostMapping("admin/categories/{categoryid}/product")
-  public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductEntityclass productDetails, @PathVariable("categoryid") long categoryId) {
+  public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductDto productDetails, @PathVariable("categoryid") long categoryId) {
       //TODO: process POST request
       ProductDto response=productService.addProduct(productDetails,categoryId);
       return new ResponseEntity<>(response,HttpStatus.OK);
@@ -83,9 +86,14 @@ public class ProductController {
       return new ResponseEntity<>(response,HttpStatus.OK);
   }
 
-  
-  
-  public void getProductbyId(){
-
+  @PutMapping("/products/{productId}/image")
+  public ResponseEntity<ProductDto> addProductImage(@RequestParam("Image") MultipartFile image,
+      @PathVariable("productId") long productId) throws IOException {
+    ProductDto response = productService.addProductImage(image, productId);
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
+
+  
+  
+  
 }
