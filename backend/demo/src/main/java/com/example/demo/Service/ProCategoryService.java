@@ -19,6 +19,7 @@ import org.springframework.ui.ModelMapExtensionsKt;
 import com.example.demo.DTO.CategoryDto;
 import com.example.demo.DTO.CategoryResponseDto;
 import com.example.demo.EntityList.CategoryEntity;
+import com.example.demo.EntityList.ProductEntityclass;
 import com.example.demo.Exception.ApiException;
 import com.example.demo.Exception.ResourceNotFound21;
 import com.example.demo.Interface.ICategoryService;
@@ -103,6 +104,11 @@ System.out.println("After save -> " + returingDto.getName());
     CategoryEntity savedCategoryEntity=catSerRepo.save(respoAfterUpdate);
     CategoryDto returingDto=modelMap.map(savedCategoryEntity,CategoryDto.class);
     return returingDto;
+  }
+
+  public java.util.Optional<ProductEntityclass> findById(long categoryId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'findById'");
   }
 
  
