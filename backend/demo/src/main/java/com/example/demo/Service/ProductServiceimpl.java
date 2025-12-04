@@ -10,6 +10,10 @@ import java.util.UUID;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +62,13 @@ public class ProductServiceimpl implements IProductServive{
 
     CategoryEntity response=categoryServiceRepo.findById(categoryId).orElseThrow(()->new ApiException("No Category found with mentioned id"+categoryId));
     //CategoryEntity category=modelMapper.map(response, CategoryEntity.class);
+
+    List<ProductEntityclass> productList=response.getProductlist();
+    for(ProductEntityclass p:productList){
+      if(p.getProductName().equalsIgnoreCase(productDetails.getProductName())){
+        throw new ApiException("Product with name "+productDetails.getProductName()+" already exists in category id :"+categoryId);
+      }
+    }
     ProductEntityclass response1=modelMapper.map(productDetails, ProductEntityclass.class);
     if(response!=null){   
       response1.setCategory(response);
@@ -85,35 +96,90 @@ public class ProductServiceimpl implements IProductServive{
   }
   
   @Override
-  public Productresponse getProductsByCateId(long categoryId) {
+  public Productresponse getProductsByCateId(long categoryId,int pageNo,int pageSize,String sortBy,String sortOrder) {
     // TODO Auto-generated method stub
+    Sort sortedll=sortOrder.equals("asc")?
+    Sort.by(sortBy).ascending(): 
+    Sort.by(sortBy).descending();
+
+    Pageable pableDet=PageRequest.of(pageNo, pageSize,sortedll);
+
      CategoryEntity response=categoryServiceRepo.findById(categoryId).orElseThrow(()->new ApiException("No Category found with mentioned id"+categoryId));
-     Productresponse products=productRepo.findByCategory(response);
+     Page pageList=productRepo.findByCategory(response,pableDet);
+     //Page<ProductEntityclass> products=productRepo.findByCategory(response,pableDet);
+     List<ProductEntityclass> ls=pageList.getContent();
+     if(ls.size()==0){
+      throw new ApiException("There were no Products To Fetch for the Category Id "+categoryId);
+     }
+      Productresponse products=new Productresponse();
+      List<ProductDto> listOfCollDto=ls.stream().map(product -> modelMapper.map(product,ProductDto.class)).toList();
+      products.setProductList(listOfCollDto);
+      products.setLastPage(pageList.isLast());
+      products.setTotalElements(pageList.getTotalElements());
+     
+    products.setTotalpages(pageList.getTotalPages());
+    products.setPageNumber(pageNo);
+    products.setPageSize(pageSize);
     //List<ProductEntityclass> products=category.getProductlist();
     return products;
   }
 
   @Override
-  public Productresponse getProductsByKeyword(String keyword) {
+  public Productresponse getProductsByKeyword(String keyword,int pageNo,int pageSize,String sortBy,String sortOrder) {
     // TODO Auto-generated method stub
-     List<ProductEntityclass> response=productRepo.findByProductNameLikeIgnoreCase("%"+keyword+"%");
+     //List<ProductEntityclass> response=productRepo.findByProductNameLikeIgnoreCase("%"+keyword+"%");
      //Productresponse products=productRepo.findByCategory(response);
     //List<ProductEntityclass> products=category.getProductlist();
-    Productresponse pr=new Productresponse();
-    List<ProductDto> productlist=response.stream().map(prod->modelMapper.map(prod,ProductDto.class)).toList();
-    pr.setProductList(productlist);
-    return pr;
+    Sort sortedll=sortOrder.equals("asc")?
+    Sort.by(sortBy).ascending(): 
+    Sort.by(sortBy).descending();
+
+    Pageable pableDet=PageRequest.of(pageNo, pageSize,sortedll);
+
+     Page pageList=productRepo.findByProductNameLikeIgnoreCase("%"+keyword+"%",pableDet);
+     //Page<ProductEntityclass> products=productRepo.findByCategory(response,pableDet);
+     List<ProductEntityclass> ls=pageList.getContent();
+     if(ls.size()==0){
+      throw new ApiException("There were no Products To Fetch for the  this Keyword: "+keyword);
+     }
+      Productresponse products=new Productresponse();
+      List<ProductDto> listOfCollDto=ls.stream().map(product -> modelMapper.map(product,ProductDto.class)).toList();
+      products.setProductList(listOfCollDto);
+      products.setLastPage(pageList.isLast());
+      products.setTotalElements(pageList.getTotalElements());
+     
+    products.setTotalpages(pageList.getTotalPages());
+    products.setPageNumber(pageNo);
+    products.setPageSize(pageSize);
+    //List<ProductEntityclass> products=category.getProductlist();
+    return products;
   }
 
   
 
   @Override
-  public Productresponse getAllProducts() {
-    List<ProductEntityclass> products=productRepo.findAll();
-    Productresponse pr=new Productresponse();
-    List<ProductDto> productDtos=products.stream().map(prod->modelMapper.map(prod,ProductDto.class)).toList();
-    pr.setProductList(productDtos);
-    return pr;
+  public Productresponse getAllProducts(int pageNo,int pageSize,String sortBy,String sortOrder) {
+    Sort sortedll=sortOrder.equals("asc")?
+    Sort.by(sortBy).ascending(): 
+    Sort.by(sortBy).descending();
+    Pageable pableDet=PageRequest.of(pageNo, pageSize,sortedll);
+    Page pageList=productRepo.findAll(pableDet);
+    List<ProductEntityclass> ls=pageList.getContent();
+    //List<ProductEntityclass> products=productRepo.findAll();
+    Productresponse products=new Productresponse();
+    List<ProductDto> productDtos=ls.stream().map(prod->modelMapper.map(prod,ProductDto.class)).toList();
+    if(productDtos.size()==0){
+      throw new ApiException("No Products found in the Database");
+    }
+    
+    products.setProductList(productDtos);
+      products.setLastPage(pageList.isLast());
+      products.setTotalElements(pageList.getTotalElements());
+     
+    products.setTotalpages(pageList.getTotalPages());
+    products.setPageNumber(pageNo);
+    products.setPageSize(pageSize);
+    return products;
   }
 
 

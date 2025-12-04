@@ -37,4 +37,12 @@ public class CategoryEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<ProductEntityclass> getProductlist() {
+        return productlist;
+    }
+
+    public void setProductlist(List<ProductEntityclass> productlist) {
+        this.productlist = productlist;
+    }
 }

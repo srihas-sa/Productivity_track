@@ -23,8 +23,8 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable());
     http.authorizeHttpRequests(
-        auth -> auth.requestMatchers("/api/signup", "/api/login", "api/testing/**").permitAll())
-            //.anyRequest().authenticated())
+        auth -> auth.requestMatchers("/api/signup", "/api/login", "api/testing/**").permitAll()
+          .anyRequest().authenticated())
         // httpBasic(Customizer.withDefaults());
         .cors(cors -> {
         });

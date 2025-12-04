@@ -11,9 +11,9 @@ public interface IProductServive {
   public ProductDto getProductById(long id);
   public ProductDto addProduct( ProductDto product,long categoryId);
   public ProductDto removeProduct(long product);
-  public Productresponse getProductsByCateId(long id); // Product based on Category Id;
-  public Productresponse getAllProducts();  //All Products
-  public Productresponse getProductsByKeyword(String keyword); //Search Products by keyword
+  public Productresponse getProductsByCateId(long id,int pageNo,int pageSize,String sortBy,String sortOrder); // Product based on Category Id;
+  public Productresponse getAllProducts(int pageNo,int pageSize,String sortBy,String sortOrder);  //All Products
+  public Productresponse getProductsByKeyword(String keyword,int pageNo,int pageSize,String sortBy,String sortOrder); //Search Products by keyword
   public ProductDto updateProduct(ProductDto pro,long id);
 
 }

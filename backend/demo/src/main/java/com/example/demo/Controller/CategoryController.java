@@ -53,7 +53,7 @@ public class CategoryController {
   public ResponseEntity<CategoryResponseDto> getCategories(
     @RequestParam(defaultValue = AppConstants.page_Number,required = false) int pageNumber,
     @RequestParam(defaultValue = AppConstants.page_Size,required = false) int pageSize,
-    @RequestParam(defaultValue = AppConstants.sortBy,required = false) String sort_By,
+    @RequestParam(defaultValue = AppConstants.sortBy_category,required = false) String sort_By,
     @RequestParam(defaultValue = AppConstants.sortOrder,required = false) String sortOrder){
     
     System.out.println(pageNumber+" "+pageSize);
